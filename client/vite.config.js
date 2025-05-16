@@ -1,15 +1,18 @@
-import { defineConfig } from "vite";
-import { sveltekit } from "@sveltejs/kit/vite";
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "vite"
+import { sveltekit } from "@sveltejs/kit/vite"
+import tailwindcss from '@tailwindcss/vite'
+import Icons from "unplugin-icons/vite"
 
 // @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 
-// @ts-expect-error config typings seem to not play nice when importing tailwind
 export default defineConfig(async () => ({
   plugins: [
     tailwindcss(),
     sveltekit(),
+    Icons({
+      compiler: "svelte",
+    }),
   ],
 
   clearScreen: false,
@@ -28,4 +31,4 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
-}));
+}))
