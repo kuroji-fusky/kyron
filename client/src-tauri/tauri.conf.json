@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "yt-archiver-frontend",
+        "title": "YT Archiver",
         "width": 1280,
         "height": 768
       }
