@@ -2,16 +2,14 @@ from typing import final, Optional
 
 
 class ArchiveError(Exception):
-    """Base exception for your mom"""
+    """Base exception for this project"""
     pass
 
 
 class InsufficentSpaceError(ArchiveError):
     """
-    Exception raised when there is not enough disk space to complete the operation.
-
-    This exception is thrown when the system detects insufficient storage space
-    to download anymore videos.
+    Exception raised when there is not enough disk space. This exception is thrown when the system detects
+    insufficient storage space to download anymore videos and othee metadata.
     """
 
     def __init__(self,

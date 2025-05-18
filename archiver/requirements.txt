@@ -1,4 +1,9 @@
+mypy
+
 # The good stuff
+requests
+types-requests
+
 bs4
 selenium
 yt-dlp
