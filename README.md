@@ -4,6 +4,8 @@ A wrapper of `yt-dlp` for bulk downloading YouTube channels/playlists locally or
 
 > [!WARNING]
 > Certain parts of the code are tailored to *my* specific use case, since they're a part of a private scripts that I use. So it won't be full-featured like yt-dlp has to offer and it won't satisfy other needs and edge cases.
+>
+> In other words: this codebase is certified **hot garbage**
 
 > [!NOTE]
 > Downloading livestreams, especially ones that exceed from few to several hours, can significantly hog up disk space. Make sure you have available space first (preferably a formatted drive) before commiting to downloading them!
