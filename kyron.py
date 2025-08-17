@@ -32,10 +32,13 @@ parser.add_argument("--dir", type=str, metavar="DIR_NAME",
                     help=f"Set custom download directory (default is the terminal's cwd: {CWD})")
 
 parser.add_argument("--create-config", action="store_true",
-                    help="Creates a .kyron_config.json file. Option is ignored if a config file exists or is defined from --download-from-config")
+                    help="Creates a .kyron_config.json file. Option is ignored if a config file "
+                         "exists or is defined from `--download-from-config`")
 
 parser.add_argument("--download-from-config", type=str, metavar="config_dir",
-                    help=f"Reads a JSON config file. If option `downloads` is set in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set")
+                    help="Reads a JSON config file. If option `downloads` is set in the config, "
+                         "positional arguments for `channel_name` is ignored completely and will "
+                         "adhere to the config you set")
 
 pg_thumb = parser.add_argument_group("Thumbnails or avatars")
 pg_thumb.add_argument("--ignore-new-thumbnails", action="store_true",
@@ -45,16 +48,21 @@ pg_thumb.add_argument("--delete-previous-thumbnails", action="store_true",
 
 
 pg_dl = parser.add_argument_group("Managing downloads")
+pg_dl.add_argument("--skip-download", "--no-download", action="store_true",
+                   help="Mirrors yt-dlp arg for skipping video downloads")
+
 pg_dl.add_argument("--rename-handle", nargs=2, metavar=("OLD_NAME", "NEW_NAME"),
                    help="Renames a handle of a channel")
 
 pg_dl.add_argument("--sleep-interval", type=int, metavar="SLEEP_SEC", default=9,
-                   help="Adds a delay in seconds for each request. Mirrors the option from yt-dlp. Default: 9")
+                   help="Adds a delay in seconds for each request. Mirrors the option from yt-dlp. "
+                        "Default: 9")
 
 pg_dl.add_argument("--download-livestreams", "--download-streams", action="store_true",
                    help="Include livestreams")
 pg_dl.add_argument("--download-shorts", action="store_true",
                    help="Include Shorts content")
+
 pg_dl.add_argument("--cookies", "-c", type=str, metavar="cookies_dir",
                    help="Use cookies from browser, only use for certain edge cases (i.e. accessing age-restricted or private videos)")
 
@@ -76,7 +84,19 @@ args_dir: Optional[str] = args.dir
 args_dl_livestreams: bool = args.download_livestreams
 args_dl_shorts: bool = args.download_shorts
 
+args_cfg_download: bool = args.download_from_config
 args_cfg_create: bool = args.create_config
+
+args_thumb_ignore: bool = args.ignore_new_thumbnails
+args_thumb_remove_prev: bool = args.delete_previous_thumbnails
+
+args_dl_skip: bool = args.skip_download
+
+args_rename_handle: tuple[str, str] = args.rename_handle
+
+args_eepy_interval: int = args.sleep_interval
+
+args_cookies: str = args.cookies
 
 args_nolog: bool = args.no_log
 args_verbose_mode: bool = args.verbose

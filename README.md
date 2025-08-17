@@ -10,6 +10,10 @@ A wrapper of `yt-dlp` for bulk downloading YouTube channels/playlists locally or
 > [!NOTE]
 > Downloading livestreams, especially ones that exceed from few to several hours, can significantly hog up disk space. Make sure you have available space first (preferably a formatted drive) before commiting to downloading them!
 
+## Installation
+
+WIP
+
 ## CLI reference
 
 ### General
@@ -20,27 +24,28 @@ A wrapper of `yt-dlp` for bulk downloading YouTube channels/playlists locally or
 | `--list <name,size,videos>` `--l <name,size,videos>` | List all downloaded channels from the current directory or from the config                                                                                                  |
 | `--dir <DIR_NAME>`                                   | Set custom download directory (default is the terminal's working directory)                                                                                                 |
 | `--download-from-config <CONFIG_DIR>`                | Reads a JSON config file. If option `downloads` is present in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set |
-| `--create-config`                                    | Creates a .kyron_config.json file. Option is ignored if a config file exists or is defined from `--download-from-config`                                                    |
-| `--no-log`                                           | Disables logging; is enabled by default to keep track of what's changed and stores it from `.kyron_data` directory for each channel                                         |
+| `--create-config`                                    | Creates a `.kyron_config.json` file. Option is ignored if a config file exists or is defined from `--download-from-config`                                                  |
+| `--no-log`                                           | Disables logging; enabled by default to keep track of what's changed and stores it from `.kyron_data` directory for each channel                                            |
 
 ### Thumbnails
 
 Options for keeping track of thumbnail/avatar changes
 
-| Argument                       | Description |
-| ------------------------------ | ----------- |
-| `--ignore-new-thumbnails`      | -           |
-| `--delete-previous-thumbnails` | -           |
+| Argument                       | Description                                                  |
+| ------------------------------ | ------------------------------------------------------------ |
+| `--ignore-new-thumbnails`      | Ignores keeping previous revisions of thumbnails and avatars |
+| `--delete-previous-thumbnails` | Deletes previous revisions from thumbnails and avatars       |
 
 ### Managing downloads
 
-| Argument                                | Description |
-| --------------------------------------- | ----------- |
-| `--rename-handle <OLD_NAME> <NEW_NAME>` | -           |
-| `--sleep-interval`                      | -           |
-| `--download-livestreams`                | -           |
-| `--download-shorts`                     | -           |
-| `--cookies`                             | -           |
+| Argument                                | Description                                                                                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--skip-download` `--no-download`       | Mirrors `yt-dlp` argument for skipping video downloads                                                                                           |
+| `--rename-handle <OLD_NAME> <NEW_NAME>` | Requires two arguments, essentially renames its folder and archive file specified in `--download-archive` from yt-dlp parameters correspondingly |
+| `--sleep-interval <SECONDS>`            | Adds a delay in seconds for each request. Mirrors the option from yt-dlp. Default: `9`                                                           |
+| `--download-livestreams`                | If available, include downloading VODs/livestreams; appends `{BASE_URL}/live` from the request URL                                               |
+| `--download-shorts`                     | If available, include downloading Shorts; appends `{BASE_URL}/shorts` from the request URL                                                       |
+| `--cookies <COOKIE_FILE>`               | Specify a cookie file; only use for certain edge cases (i.e. accessing age-restricted or private videos)                                         |
 
 ### Others/Misc.
 

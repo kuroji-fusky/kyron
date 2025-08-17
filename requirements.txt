@@ -8,6 +8,4 @@ bs4
 selenium
 yt-dlp
 
-# API Stuff
-fastapi
-uvicorn
+colorama
