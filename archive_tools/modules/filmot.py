@@ -1,6 +1,8 @@
 """Filmot module"""
 
-from utils.requests import get_soup  # type: ignore
+__all__ = ["filmot"]
+
+from ..requests import get_soup
 
 FILMOT_BASE_URL = "filmot.com"
 

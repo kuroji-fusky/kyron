@@ -3,7 +3,7 @@
 from typing import Optional, Any
 import json
 
-import requests
+import requests # todo: replace this shit with httpx
 from bs4 import BeautifulSoup
 
 rs = requests.Session()
