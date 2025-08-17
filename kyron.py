@@ -5,6 +5,8 @@ Kyron - a tool for bulk downloading YT videos
 import os
 import sys
 import json
+import subprocess
+
 from typing import Optional
 from argparse import ArgumentParser
 
@@ -74,7 +76,6 @@ pg_misc.add_argument("--verbose", "-v", action="store_true",
 
 
 args = parser.parse_args()
-# endregion
 
 # Arguments
 pos_args_channels: list[str] = args.channel_name
@@ -96,6 +97,7 @@ args_dl_shorts: bool = args.download_shorts
 
 args_nolog: bool = args.no_log
 args_verbose_mode: bool = args.verbose
+# endregion
 
 
 def _verbose_log(*args):
@@ -120,20 +122,83 @@ def main():
     if args_cfg_create \
             and not (os.path.exists(".kyron_config.json") or os.path.exists(".kyron_config.jsonc")):
         print("INFO: No config file found, automatically generated one")
+
         with open(os.path.join(base_path, ".kyron_config.json"), "w") as f:
             json.dump(default_config, f, indent=2)
 
-    if len(sys.argv) == 1:
-        # parser.print_help()
-        print("some minimal help here")
-        sys.exit(2)
+    # in case some dummy passes both --create-config and --download-from-config
+    elif args_cfg_create and args_cfg_download:
+        print(
+            "INFO: `--create-config` is ignored when `--download-from-config` is present.")
+    else:
+        print("INFO: Config file already exists")
 
 
-def process_ytdlp_command(has_livestream: bool = False, has_shorts: bool = False, cookies: Optional[str] = None, slep_interval=9):
-    base_args = ["yt-dlp"]
-    ...
+def process_ytdlp_command(channel_url: str, *,
+                          ignore_archive: bool = False,
+                          skip_downloads: bool = False,
+                          has_livestream: bool = False,
+                          has_shorts: bool = False,
+                          cookies: Optional[str] = None,
+                          eppy_interval=9):
+    """Internal function that processes yt-dlp arguments
+
+    Args:
+        channel_url (str): Required for downloading your goods, duh
+        ignore_archive (bool, optional): Omits `--download-archive`. Defaults to False.
+        has_livestream (bool, optional): Removes any filters that would usually omit from downloading livestreams. Defaults to False.
+        has_shorts (bool, optional): Appends "{channel_url}/shorts" to the request. Defaults to False.
+        cookies (Optional[str], optional): Passes `--cookies`. Defaults to None.
+        eppy_interval (int, optional): For delaying requests; passes `--sleep-interval`. Defaults to 9.
+    """
+    cmd_args: list[str] = []
+
+    cmd_args.append(*[
+        "yt-dlp",
+        channel_url,
+        "--format", "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+        "--format-sort", "vcodec:h264",
+        "--embed-subs", "--embed-metadata", "--write-description",
+        "--write-subs", "--write-auto-subs", "--write-info-json",
+        "--write-thumbnail", "--convert-thumbnails", "jpg",
+        "--remux-video", "mp4",
+        "--sleep-interval", str(eppy_interval)
+    ])
+
+    if not skip_downloads:
+        cmd_args.append(*["--skip-download"])
+
+    if not ignore_archive:
+        cmd_args.append(*["--download-archive", archive_filename])
+
+    if cookies:
+        cmd_args.append(*["--cookies", cookies])
+
+    # Download the vids first before proceeding the rest
+    _sp_wrapper(*cmd_args, f"{channel_url}/videos")
+
+    if has_shorts:
+        _sp_wrapper(*cmd_args, f"{channel_url}/shorts")
+
+    if has_livestream:
+        cmd_args.append(*[
+            "--match-filter", fr"!is_live & !was_live & !live_chat & duration<{3600*1.85}",
+        ])
+        _sp_wrapper(*cmd_args, f"{channel_url}/streams")
+
+
+def _sp_wrapper(*cmd):
+    """A wrapper for `subprocess.run`, automatically handling error handling and stuff"""
+    try:
+        subprocess.run(*cmd,
+                       text=True, universal_newlines=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Returned exit code {e.returncode}:", e.output)
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print("some minimal help here")
+        sys.exit(2)
 
     main()
