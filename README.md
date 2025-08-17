@@ -3,7 +3,7 @@
 A wrapper of `yt-dlp` for bulk downloading YouTube channels/playlists locally or for archival purposes. It can also download deleted or private YouTube videos via Wayback Machine, on your system locally
 
 > [!WARNING]
-> Certain parts of the code that are tailored to my specific use case, since those are a part of a private scripts that I personally use. So it won't be full-featured like yt-dlp has to offer and it won't satisfy other needs and edge cases.
+> Certain parts of the code are tailored to *my* specific use case, since they're a part of a private scripts that I use. So it won't be full-featured like yt-dlp has to offer and it won't satisfy other needs and edge cases.
 
 > [!NOTE]
 > Downloading livestreams, especially ones that exceed from few to several hours, can significantly hog up disk space. Make sure you have available space first (preferably a formatted drive) before commiting to downloading them!
