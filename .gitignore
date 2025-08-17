@@ -3,3 +3,6 @@ venv/
 __pycache__/
 
 .mypy_cache/
+
+# no need to track the config file, this is for testing
+.kyron_config.json

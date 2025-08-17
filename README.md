@@ -1,54 +1,128 @@
-# yt-archiver
+<h1 align="center">Kyron</h1>
 
-## Development
+A wrapper of yt-dlp for bulk downloading YouTube channels/playlists locally or for archival purposes. It can also download deleted or private YouTube videos via Wayback Machine, on your system locally
 
-### Prerequisites
+> [!NOTE]
+> Downloading livestreams, especially ones that exceed from few to several hours, can significantly hog up disk space. Make sure you have available space first (preferably a formatted drive) before commiting to downloading them!
 
-- Python 3.10 or higher
-- Node.js' LTS supported version (currently 22.x.x)
-  - PNPM package manager
-- [Rust](https://www.rust-lang.org/tools/install)
-  - Development for Tauri's prerequisities can be found [here](https://v2.tauri.app/start/prerequisites/)
+## CLI reference
 
-### Setup
+### General
 
-There are two directories: `client` and `archiver`, both of their dependencies can be installed one way or the other.
+| Argument                                             | Description                                                                                                                                                                 |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `channel_name <...>`                                 | A list of YouTube channel handle(s) to download, will be ignored if config has `downloads` has items                                                                        |
+| `--list <name,size,videos>` `--l <name,size,videos>` | List all downloaded channels from the current directory or from the config                                                                                                  |
+| `--dir <DIR_NAME>`                                   | Set custom download directory (default is the terminal's working directory)                                                                                                 |
+| `--download-from-config`                             | Reads a JSON config file. If option `downloads` is present in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set |
+| `--create-config`                                    | Creates a .kyron_config.json file. Option is ignored if a config file exists or is defined from `--download-from-config`                                                    |
+| `--no-log`                                           | Disables logging; is enabled by default to keep track of what's changed and stores it from `.kyron_data` directory for each channel                                         |
 
-#### From `client`
+### Thumbnails
 
-1. Install the projects dependencies with:
-    ```console
-    pnpm install
-    ```
+Options for keeping track of thumbnail/avatar changes
 
-1. Run the development version of the app with 
-    ```console
-    pnpm tauri dev
-    ```
+| Argument                       | Description |
+| ------------------------------ | ----------- |
+| `--ignore-new-thumbnails`      | -           |
+| `--delete-previous-thumbnails` | -           |
 
-    For Windows: if you run to issues running the desktop app, you might need to double-check if you have [Microsoft C++ Build Tools](https://v2.tauri.app/start/prerequisites/#windows) installed.
+### Managing downloads
 
-#### From `archiver`
+| Argument                                | Description |
+| --------------------------------------- | ----------- |
+| `--rename-handle <OLD_NAME> <NEW_NAME>` | -           |
+| `--sleep-interval`                      | -           |
+| `--download-livestreams`                | -           |
+| `--download-shorts`                     | -           |
+| `--cookies`                             | -           |
 
-1. Create a virtual environment with `python -m venv venv`, and activate it with:
-    - Most platforms:
-      ```console
-      ./venv/Scripts/activate
-      ```
+### Others/Misc.
 
-    - Using PowerShell:
-      ```ps1
-      .\venv\Scripts\Activate.ps1
-      ```
+For development stuff
 
-    - macOS:
-      ```sh
-      source venv/bin/activate
-      ```
+| Argument          | Description                                                                                   |
+| ----------------- | --------------------------------------------------------------------------------------------- |
+| `--verbose`, `-v` | Enables verbose logging, useful for debugging, or... I dunno, showing your hacker superiority |
 
-    - Linux:
-      ```sh
-      source venv/Scripts/activate
-      ```
+## Config reference
 
-2. Install project dependencies with `python install -r requirements.txt`
+The default config generates this:
+
+```json
+{
+  "shorts": {
+    "include": false
+  },
+  "livestreams": {
+    "include": false,
+    "length_limit": 0
+  },
+  "downloads": []
+}
+```
+
+### `downloads`
+
+You can either specify a list of channels/playlists or have a specific condition of a channel, can be mixed with either option.
+
+Example of a basic list of channels:
+
+```json
+{
+  "downloads": [
+    "@abc",
+    "@def"
+  ] 
+}
+```
+
+Applying certain conditions of a channel:
+
+```json
+{
+  "downloads": [
+    {
+      "handle": "@abc",
+      "livestreams": {
+        "include": true,
+        "length": ">=1h30m"
+      }
+    },
+    {
+      "handle": "@def",
+      "shorts": {
+        "include": true
+      }
+    }
+  ] 
+}
+```
+
+### `shorts`
+
+Download Shorts from a creator; can be enabled with the `shorts.include` flag.
+
+**Defaults:**
+
+```json
+{
+  "shorts": {
+    "includes": false
+  }
+}
+```
+
+### `livestreams`
+
+Download VODs/livestreams from a creator
+
+**Defaults:**
+
+```json
+{
+  "livestreams": {
+    "includes": false
+  }
+}
+```
