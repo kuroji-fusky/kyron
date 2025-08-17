@@ -1,6 +1,9 @@
 <h1 align="center">Kyron</h1>
 
-A wrapper of yt-dlp for bulk downloading YouTube channels/playlists locally or for archival purposes. It can also download deleted or private YouTube videos via Wayback Machine, on your system locally
+A wrapper of `yt-dlp` for bulk downloading YouTube channels/playlists locally or for archival purposes. It can also download deleted or private YouTube videos via Wayback Machine, on your system locally
+
+> [!WARNING]
+> Certain parts of the code that are tailored to my specific use case, since those are a part of a private scripts that I personally use. So it won't be full-featured like yt-dlp has to offer and it won't satisfy other needs and edge cases.
 
 > [!NOTE]
 > Downloading livestreams, especially ones that exceed from few to several hours, can significantly hog up disk space. Make sure you have available space first (preferably a formatted drive) before commiting to downloading them!
@@ -14,7 +17,7 @@ A wrapper of yt-dlp for bulk downloading YouTube channels/playlists locally or f
 | `channel_name <...>`                                 | A list of YouTube channel handle(s) to download, will be ignored if config has `downloads` has items                                                                        |
 | `--list <name,size,videos>` `--l <name,size,videos>` | List all downloaded channels from the current directory or from the config                                                                                                  |
 | `--dir <DIR_NAME>`                                   | Set custom download directory (default is the terminal's working directory)                                                                                                 |
-| `--download-from-config`                             | Reads a JSON config file. If option `downloads` is present in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set |
+| `--download-from-config <CONFIG_DIR>`                | Reads a JSON config file. If option `downloads` is present in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set |
 | `--create-config`                                    | Creates a .kyron_config.json file. Option is ignored if a config file exists or is defined from `--download-from-config`                                                    |
 | `--no-log`                                           | Disables logging; is enabled by default to keep track of what's changed and stores it from `.kyron_data` directory for each channel                                         |
 
