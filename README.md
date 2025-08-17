@@ -1,11 +1,11 @@
 <h1 align="center">Kyron</h1>
 
-A wrapper of `yt-dlp` for bulk downloading YouTube channels/playlists locally or for archival purposes. It can also download deleted or private YouTube videos via Wayback Machine, on your system locally
+A shitty `yt-dlp` wrapper for bulk downloading YouTube channels/playlists locally or for archival purposes. It can also download deleted or private YouTube videos via Wayback Machine, on your system locally
 
 > [!WARNING]
 > Certain parts of the code are tailored to *my* specific use case, since they're a part of a private scripts that I use. So it won't be full-featured like yt-dlp has to offer and it won't satisfy other needs and edge cases.
 >
-> In other words: this codebase is certified **hot garbage**
+> In other words: this codebase is certified **H O T garbage**
 
 > [!NOTE]
 > Downloading livestreams, especially ones that exceed from few to several hours, can significantly hog up disk space. Make sure you have available space first (preferably a formatted drive) before commiting to downloading them!
@@ -23,9 +23,8 @@ WIP
 | `channel_name <...>`                                 | A list of YouTube channel handle(s) to download, will be ignored if config has `downloads` has items                                                                        |
 | `--list <name,size,videos>` `--l <name,size,videos>` | List all downloaded channels from the current directory or from the config                                                                                                  |
 | `--dir <DIR_NAME>`                                   | Set custom download directory (default is the terminal's working directory)                                                                                                 |
-| `--download-from-config <CONFIG_DIR>`                | Reads a JSON config file. If option `downloads` is present in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set |
 | `--create-config`                                    | Creates a `.kyron_config.json` file. Option is ignored if a config file exists or is defined from `--download-from-config`                                                  |
-| `--no-log`                                           | Disables logging; enabled by default to keep track of what's changed and stores it from `.kyron_data` directory for each channel                                            |
+| `--download-from-config <CONFIG_DIR>`                | Reads a JSON config file. If option `downloads` is present in the config, positional arguments for channel_name is ignored completely and will adhere to the config you set |
 
 ### Thumbnails
 
@@ -42,18 +41,19 @@ Options for keeping track of thumbnail/avatar changes
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--skip-download` `--no-download`       | Mirrors `yt-dlp` argument for skipping video downloads                                                                                           |
 | `--rename-handle <OLD_NAME> <NEW_NAME>` | Requires two arguments, essentially renames its folder and archive file specified in `--download-archive` from yt-dlp parameters correspondingly |
-| `--sleep-interval <SECONDS>`            | Adds a delay in seconds for each request. Mirrors the option from yt-dlp. Default: `9`                                                           |
+| `--sleep-interval <SLEEP_SEC>`          | Adds a delay in seconds for each request. Mirrors the option from yt-dlp. Default: `9`                                                           |
 | `--download-livestreams`                | If available, include downloading VODs/livestreams; appends `{BASE_URL}/live` from the request URL                                               |
 | `--download-shorts`                     | If available, include downloading Shorts; appends `{BASE_URL}/shorts` from the request URL                                                       |
 | `--cookies <COOKIE_FILE>`               | Specify a cookie file; only use for certain edge cases (i.e. accessing age-restricted or private videos)                                         |
 
 ### Others/Misc.
 
-For development stuff
+For development stuff or niche use cases
 
-| Argument          | Description                                                                                   |
-| ----------------- | --------------------------------------------------------------------------------------------- |
-| `--verbose`, `-v` | Enables verbose logging, useful for debugging, or... I dunno, showing your hacker superiority |
+| Argument          | Description                                                                                                                      |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `--no-log`        | Disables logging; enabled by default to keep track of what's changed and stores it from `.kyron_data` directory for each channel |
+| `--verbose`, `-v` | Enables verbose logging, useful for debugging, or... I dunno, showing your hacker superiority                                    |
 
 ## Config reference
 

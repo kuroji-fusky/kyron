@@ -46,7 +46,6 @@ pg_thumb.add_argument("--ignore-new-thumbnails", action="store_true",
 pg_thumb.add_argument("--delete-previous-thumbnails", action="store_true",
                       help="Deletes previous revisions from thumbnails and avatars")
 
-
 pg_dl = parser.add_argument_group("Managing downloads")
 pg_dl.add_argument("--skip-download", "--no-download", action="store_true",
                    help="Mirrors yt-dlp arg for skipping video downloads")
@@ -63,7 +62,7 @@ pg_dl.add_argument("--download-livestreams", "--download-streams", action="store
 pg_dl.add_argument("--download-shorts", action="store_true",
                    help="Include Shorts content")
 
-pg_dl.add_argument("--cookies", "-c", type=str, metavar="cookies_dir",
+pg_dl.add_argument("--cookies", "-c", type=str, metavar="COOKIES_FILE",
                    help="Use cookies from browser, only use for certain edge cases (i.e. accessing age-restricted or private videos)")
 
 pg_misc = parser.add_argument_group("Miscellaneous")
@@ -81,28 +80,25 @@ args = parser.parse_args()
 pos_args_channels: list[str] = args.channel_name
 
 args_dir: Optional[str] = args.dir
-args_dl_livestreams: bool = args.download_livestreams
-args_dl_shorts: bool = args.download_shorts
-
-args_cfg_download: bool = args.download_from_config
+args_list_contents: bool = args.list
 args_cfg_create: bool = args.create_config
+args_cfg_download: bool = args.download_from_config
 
 args_thumb_ignore: bool = args.ignore_new_thumbnails
 args_thumb_remove_prev: bool = args.delete_previous_thumbnails
 
 args_dl_skip: bool = args.skip_download
-
 args_rename_handle: tuple[str, str] = args.rename_handle
-
 args_eepy_interval: int = args.sleep_interval
-
 args_cookies: str = args.cookies
+args_dl_livestreams: bool = args.download_livestreams
+args_dl_shorts: bool = args.download_shorts
 
 args_nolog: bool = args.no_log
 args_verbose_mode: bool = args.verbose
 
 
-def verbose_log(*args):
+def _verbose_log(*args):
     if not args_verbose_mode:
         return
 
