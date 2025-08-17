@@ -96,7 +96,7 @@ Applying certain conditions of a channel:
       "handle": "@abc",
       "livestreams": {
         "include": true,
-        "length": ">=1h30m"
+        "filter": ">=1h30m"
       }
     },
     {
@@ -134,5 +134,48 @@ Download VODs/livestreams from a creator
   "livestreams": {
     "includes": false
   }
+}
+```
+
+
+### Options
+
+There are some specific keys that are used in objects:
+
+- `handle` can only used on `downloads`
+- `include` can only used on `livestreams` and `shorts`
+
+Config schema
+
+```ts
+interface Schema {
+  shorts?: {
+    include: boolean
+    cookies?: string
+  }
+
+  livestreams?: {
+    include: boolean
+    filter?: string
+    cookies?: string
+  }
+
+  cookies?: string
+  check_thumbnails?: boolean
+
+  downloads?: (
+    | string
+    | {
+      handle: string
+      check_thumbnails?: boolean
+      cookies?: string
+      shorts?: {
+        include: boolean
+      }
+      livestreams?: {
+        include: boolean
+        filter: string
+      }
+    })[]
 }
 ```

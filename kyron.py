@@ -140,7 +140,7 @@ def process_ytdlp_command(channel_url: str, *,
                           has_livestream: bool = False,
                           has_shorts: bool = False,
                           cookies: Optional[str] = None,
-                          eppy_interval=9):
+                          eepy_interval=9):
     """Internal function that processes yt-dlp arguments
 
     Args:
@@ -149,7 +149,7 @@ def process_ytdlp_command(channel_url: str, *,
         has_livestream (bool, optional): Removes any filters that would usually omit from downloading livestreams. Defaults to False.
         has_shorts (bool, optional): Appends "{channel_url}/shorts" to the request. Defaults to False.
         cookies (Optional[str], optional): Passes `--cookies`. Defaults to None.
-        eppy_interval (int, optional): For delaying requests; passes `--sleep-interval`. Defaults to 9.
+        eepy_interval (int, optional): For delaying requests; passes `--sleep-interval`. Defaults to 9.
     """
     cmd_args: list[str] = []
 
@@ -162,7 +162,7 @@ def process_ytdlp_command(channel_url: str, *,
         "--write-subs", "--write-auto-subs", "--write-info-json",
         "--write-thumbnail", "--convert-thumbnails", "jpg",
         "--remux-video", "mp4",
-        "--sleep-interval", str(eppy_interval)
+        "--sleep-interval", str(eepy_interval)
     ])
 
     if not skip_downloads:
@@ -190,7 +190,7 @@ def process_ytdlp_command(channel_url: str, *,
 def _sp_wrapper(*cmd):
     """A wrapper for `subprocess.run`, automatically handling error handling and stuff"""
     try:
-        subprocess.run(*cmd,
+        subprocess.run([*cmd],
                        text=True, universal_newlines=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Returned exit code {e.returncode}:", e.output)
