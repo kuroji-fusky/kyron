@@ -1,3 +1,10 @@
+use tauri::Runtime;
+
+#[tauri::command]
+async fn maximize_state<R: Runtime>(window: tauri::Window<R>) -> Result<(), String> {
+  Ok(())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()

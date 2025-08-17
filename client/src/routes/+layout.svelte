@@ -1,8 +1,10 @@
 <script>
   const { children } = $props();
   import "../app.css";
-  import Navbar from "../lib/components/Navbar.svelte";
+  import Titlebar from "../lib/components/Titlebar.svelte";
 </script>
 
-<Navbar />
-{@render children()}
+<Titlebar />
+<div class="mt-10">
+  {@render children()}
+</div>

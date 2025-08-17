@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "yt-archiver-frontend",
+  "productName": "bentobox-frontend",
   "version": "0.1.0",
-  "identifier": "kuroji-fusky.yt-archiver.app",
+  "identifier": "fusky-labs.bentobox.app",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -14,7 +14,8 @@
       {
         "title": "YT Archiver",
         "width": 1280,
-        "height": 768
+        "height": 768,
+        "decorations": false
       }
     ],
     "security": {
