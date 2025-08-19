@@ -1,12 +1,14 @@
 import colorama  # type: ignore
 from typing import Any, Optional
 
+__all__ = ["kyron_tables"]
+
 AnyDict = dict[str, Any]
 
 
-class table_maker:
+class kyron_tables:
     """
-    A nifty mini-class for generating tables from da terminal
+    A nifty class for generating tables from da terminal
     """
 
     def __init__(self, *,

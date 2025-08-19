@@ -11,7 +11,8 @@ from typing import Optional
 from argparse import ArgumentParser
 
 import config_parser as kyron_conf
-from kyron_utils import tables as ky_tables
+from kyron_utils.tables import kyron_tables
+from kyron_utils.logger import kyron_logger
 from kyron_utils.constants import CWD, default_config
 
 # region Arguments
@@ -100,18 +101,11 @@ args_verbose_mode: bool = args.verbose
 # endregion
 
 
-def _verbose_log(*args):
-    if not args_verbose_mode:
-        return
-
-    print(*args)
+ky_log = kyron_logger(verbose_mode=args_verbose_mode)
 
 
 def main():
-    # yes = ky_tables.table_maker(heading="Downloaded channels")
-    # yes.show()
-
-    print(args)
+    ky_log.debug(args)
 
     # Initialize configs
     if not args_dir:
@@ -121,17 +115,16 @@ def main():
 
     if args_cfg_create \
             and not (os.path.exists(".kyron_config.json") or os.path.exists(".kyron_config.jsonc")):
-        print("INFO: No config file found, automatically generated one")
+        ky_log.info("No config file found, automatically generated one")
 
         with open(os.path.join(base_path, ".kyron_config.json"), "w") as f:
             json.dump(default_config, f, indent=2)
 
     # in case some dummy passes both --create-config and --download-from-config
     elif args_cfg_create and args_cfg_download:
-        print(
-            "INFO: `--create-config` is ignored when `--download-from-config` is present.")
+        ky_log.info("`--create-config` is ignored when `--download-from-config` is present.")  # noqa
     else:
-        print("INFO: Config file already exists")
+        ky_log.info("Config file already exists")
 
 
 def process_ytdlp_command(channel_url: str, *,
