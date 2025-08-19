@@ -10,10 +10,11 @@ import subprocess
 from typing import Optional
 from argparse import ArgumentParser
 
-import config_parser as kyron_conf
+# from kyron_utils.config import kyron_conf
+from kyron_utils.config import kyron_conf, is_supported_config_files
 from kyron_utils.tables import kyron_tables
 from kyron_utils.logger import kyron_logger
-from kyron_utils.constants import CWD, default_config
+from kyron_utils.constants import CWD
 
 # region Arguments
 parser = ArgumentParser(
@@ -113,14 +114,12 @@ def main():
     else:
         base_path = args_dir
 
-    if args_cfg_create \
-            and not (os.path.exists(".kyron_config.json") or os.path.exists(".kyron_config.jsonc")):
+    if args_cfg_create and not is_supported_config_files:
         ky_log.info("No config file found, automatically generated one")
 
-        with open(os.path.join(base_path, ".kyron_config.json"), "w") as f:
-            json.dump(default_config, f, indent=2)
+        kyron_conf.create_config()
 
-    # in case some dummy passes both --create-config and --download-from-config
+        # in case some dummy passes both --create-config and --download-from-config
     elif args_cfg_create and args_cfg_download:
         ky_log.info("`--create-config` is ignored when `--download-from-config` is present.")  # noqa
     else:
