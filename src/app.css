@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@import "@fontsource/inter";
+@import "@fontsource/instrument-sans";
+@import "@fontsource/instrument-sans/700.css";
+
+@import "@fontsource/ibm-plex-mono";
+
+@theme {
+  --font-heading: "Instrument Sans", var(--default-font-family);
+  --font-body: "Inter", var(--default-font-family);
+  --font-code: "IBM Plex Mono", var(--default-mono-font-family);
+}
+
+@layer base {
+  html {
+    @apply overflow-hidden antialiased dark:bg-neutral-950 dark:text-white;
+  }
+
+  body {
+    @apply font-body
+  }
+
+  :is(h1, h2, h3, h4):not(.reset-style) {
+    @apply font-heading font-bold
+  }
+
+  code {
+    @apply font-code;
+  }
+
+  a:not(.reset-style) {
+    @apply underline;
+  }
+}

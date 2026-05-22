@@ -2,7 +2,7 @@ class KyronTable:
     def __init__(self, *,  headings: list[str], data: tuple[list[str], ...]) -> None:
         self.V_SEPARATOR = "|"
         self.H_SEPARATOR = "—"
-        self.NOTCH = "+"
+        self.CORNER = "+"
 
         self.parsed_table: list[str] = []
 
@@ -36,7 +36,7 @@ class KyronTable:
             self._pad_value(self.H_SEPARATOR, pad=p+2)
             for _, p in self._table_def_max_padding
         ]
-        t_separator: str = self._wrap_row(self.NOTCH, self.NOTCH.join(t_separator_partial))  # noqa
+        t_separator: str = self._wrap_row(self.CORNER, self.CORNER.join(t_separator_partial))  # noqa
 
         self.parsed_table.extend([t_separator, t_heading, t_separator])  # noqa
 

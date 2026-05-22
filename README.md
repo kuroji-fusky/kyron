@@ -1,7 +1,5 @@
-# Tauri + SvelteKit + TypeScript
+# Kyron
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+a silly tool for not just downloading vids, but also archiving them... yeah
 
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+bootstrapped with [sveltronkit](https://github.com/Pandoks/sveltronkit)
