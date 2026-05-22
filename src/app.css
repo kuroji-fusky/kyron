@@ -4,6 +4,7 @@
 
 @import "@fontsource/inter";
 @import "@fontsource/instrument-sans";
+@import "@fontsource/instrument-sans/500.css";
 @import "@fontsource/instrument-sans/700.css";
 
 @import "@fontsource/ibm-plex-mono";
@@ -20,7 +21,7 @@
   }
 
   body {
-    @apply font-body
+    @apply font-body select-none overflow-hidden scheme-light-dark antialiased;
   }
 
   :is(h1, h2, h3, h4):not(.reset-style) {
