@@ -4,10 +4,4 @@ import GlobalSidebar from "./GlobalSidebar.svelte"
 import LogPanel from "./LogPanel.svelte"
 import Notice from "./Notice.svelte"
 
-export {
-  Button,
-  Checkbox,
-  LogPanel,
-  Notice,
-  GlobalSidebar
-}
+export { Button, Checkbox, LogPanel, Notice, GlobalSidebar }

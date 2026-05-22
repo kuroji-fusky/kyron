@@ -1,3 +1,6 @@
-import type { Snippet } from "svelte";
+import type { Snippet } from "svelte"
 
-export type WithCommonSnippet<T extends object = {}> = { children?: Snippet } & T
+// biome-ignore lint/complexity/noBannedTypes: required for full type safety
+export type WithCommonSnippet<T extends object = {}> = {
+  children?: Snippet
+} & T
