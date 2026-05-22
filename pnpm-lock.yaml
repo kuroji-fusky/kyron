@@ -11,6 +11,9 @@ importers:
       electron-squirrel-startup:
         specifier: ^1.0.1
         version: 1.0.1
+      lodash:
+        specifier: ^4.18.1
+        version: 4.18.1
     devDependencies:
       '@biomejs/biome':
         specifier: 2.4.0
@@ -5165,8 +5168,7 @@ snapshots:
 
   lodash.get@4.4.2: {}
 
-  lodash@4.18.1:
-    optional: true
+  lodash@4.18.1: {}
 
   log-symbols@4.1.0:
     dependencies:
