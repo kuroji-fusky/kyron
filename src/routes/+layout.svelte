@@ -57,7 +57,7 @@
   <GlobalSidebar />
   <div
     id="container"
-    class="overflow-y-auto overflow-x-hidden flex-1 rounded-md border border-neutral-700 bg-neutral-900 h-full ml-0 mt-0 m-3"
+    class="overflow-y-auto overflow-x-hidden flex-1 rounded-md border border-neutral-700 bg-neutral-900 h-full ml-0 mt-0 m-3 px-6 py-4"
   >
     {@render children?.()}
     <LogPanel />

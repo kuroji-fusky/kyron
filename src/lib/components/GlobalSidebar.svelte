@@ -7,10 +7,11 @@
     sidebarMinSize,
   } from "$lib/contexts";
   import {
-    Clock4Icon,
     DownloadIcon,
+    HistoryIcon,
     LibraryBigIcon,
     SettingsIcon,
+    ZapIcon,
     type LucideIcon,
   } from "@lucide/svelte";
 
@@ -20,11 +21,12 @@
     icon: LucideIcon;
   }
 
-  const menus = [
-    { name: "Download", href: "/", icon: DownloadIcon },
+  const menus: _MenuItem[] = [
+    { name: "Download", href: "/download", icon: DownloadIcon },
     { name: "Library", href: "/library", icon: LibraryBigIcon },
-    { name: "Tasks", href: "/tasks", icon: Clock4Icon },
-  ] as const satisfies _MenuItem[];
+    { name: "Tasks", href: "/tasks", icon: ZapIcon },
+    { name: "History", href: "/history", icon: HistoryIcon },
+  ];
 
   const sidebarToggleState = getSidebarToggleState();
   const modalState = getModalStates();
@@ -35,7 +37,10 @@
 </script>
 
 <nav
-  class={["overflow-hidden z-10 shrink-0 transition-[width,opacity] duration-200 fixed top-10 bottom-0 left-0 flex flex-col gap-y-1 px-3 py-3.5", !sidebarToggleState() ? "opacity-60 hover:opacity-100" : ""]}
+  class={[
+    "overflow-hidden z-10 shrink-0 transition-[width,opacity] duration-200 fixed top-10 bottom-0 left-0 flex flex-col gap-y-1 px-3 py-3.5",
+    !sidebarToggleState() ? "opacity-60 hover:opacity-100" : "",
+  ]}
   style={`
     width: calc(var(--spacing)*${!sidebarToggleState() ? sidebarMinSize : sidebarMaxSize});
     --menu-item-opacity:${!sidebarToggleState() ? 0 : 1}

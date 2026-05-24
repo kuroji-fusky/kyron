@@ -1,15 +1,17 @@
-import { app, BrowserWindow } from "electron";
-import path from "node:path";
-import started from "electron-squirrel-startup";
+import { app, BrowserWindow } from "electron"
+import path from "node:path"
+import started from "electron-squirrel-startup"
 
 if (started) {
-  app.quit();
+  app.quit()
 }
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     titleBarStyle: "hidden",
-    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
+    titleBarOverlay: {
+      height: 32,
+    },
 
     width: 1280,
     height: 780,
@@ -18,36 +20,34 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(import.meta.dirname, "preload.js"),
     },
-  });
+  })
 
-  // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL)
     mainWindow.webContents.on("did-frame-finish-load", () => {
-      mainWindow.webContents.openDevTools({ mode: "detach" });
-    });
+      mainWindow.webContents.openDevTools({ mode: "detach" })
+    })
   } else {
     mainWindow.loadFile(
       path.join(
         import.meta.dirname,
         `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`,
       ),
-    );
+    )
   }
-};
+}
 
-app.on("ready", createWindow);
+app.on("ready", createWindow)
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
-    app.quit();
+    app.quit()
   }
-});
+})
 
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    createWindow()
   }
-});
-
+})
