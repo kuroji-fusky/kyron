@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LogPanel, GlobalSidebar } from "$lib/components";
+  import { GlobalSidebar } from "$lib/components";
   import {
     setSidebarToggleState,
     sidebarMaxSize,
@@ -60,7 +60,6 @@
     class="overflow-y-auto overflow-x-hidden flex-1 rounded-md border border-neutral-700 bg-neutral-900 h-full ml-0 mt-0 m-3 px-6 py-4"
   >
     {@render children?.()}
-    <LogPanel />
   </div>
 </div>
 
