@@ -1,22 +1,20 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import Portal from "../Portal.svelte";
-  import type { WithCommonSnippet } from "../shared";
+  import type { HTMLAttributes } from "svelte/elements";
 
-  interface Props {
-    modalEvent?: () => void;
-    open?: boolean;
-  }
+  type Props = {
+    children?: Snippet;
+    visible?: boolean;
+  } & Pick<HTMLAttributes<HTMLDivElement>, "class">;
 
-  const { children, open: isOpen }: WithCommonSnippet<Props> = $props();
-
-  // svelte-ignore state_referenced_locally
-  let isModalOpen = $state(isOpen ?? false);
+  const { children, visible, class: className }: Props = $props();
 </script>
 
-<Portal>
-  {#if isModalOpen}
-    <div class="fixed inset-3.5 rounded-md bg-amber-900">
+{#if visible}
+  <Portal focusGuard={visible}>
+    <div class={className} role="dialog" aria-modal="true">
       {@render children?.()}
     </div>
-  {/if}
-</Portal>
+  </Portal>
+{/if}

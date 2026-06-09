@@ -4,6 +4,7 @@ import CheckboxDetails from "./CheckboxDetails.svelte"
 import GlobalSidebar from "./GlobalSidebar.svelte"
 import Notice from "./Notice.svelte"
 import Breadcrumbs from "./Breadcrumbs.svelte"
+import LegalDisclaimer from "./LegalDisclaimer.svelte"
 
 export {
   Button,
@@ -12,4 +13,5 @@ export {
   CheckboxDetails,
   Notice,
   GlobalSidebar,
+  LegalDisclaimer
 }
