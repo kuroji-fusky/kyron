@@ -10,7 +10,7 @@ An all-in-one downloader, archiver, and asset manager; built for an archivists' 
    that accesses `web_dashboard`
 - `python_shared` - shared Python code for the backend and sidecar
 - `sidecar` - the a Python background process responsible for communicating
-  between the desktop client and native OS APIs such as task scheduling
+  between the desktop client and OS-native APIs such as task scheduling
 - `web_dashboard` - A dashboard similar to what the desktop client offers
 - `web_shared` - shared code and Svelte components
 
