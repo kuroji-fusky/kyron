@@ -1,3 +1,0 @@
-yt-dlp
-
-types_yt-dlp

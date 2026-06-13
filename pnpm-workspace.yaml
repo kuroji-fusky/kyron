@@ -2,3 +2,8 @@ allowBuilds:
   electron: true
   electron-winstaller: true
   esbuild: true
+
+packages:
+  - "kyron-client"
+  - "kyron-shared"
+  - "kyron-dashboard"

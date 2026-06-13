@@ -1,22 +1,37 @@
 <script lang="ts">
-  import type { WithCommonSnippet } from "$lib/components/shared";
+  import { resolve } from "$app/paths";
   import {
+    ArrowLeftIcon,
     HardDriveIcon,
     ListFilterIcon,
     PanelRightIcon,
     SearchIcon,
   } from "@lucide/svelte";
+  import { page } from "$app/state";
+  import type { Snippet } from "svelte";
 
-  const { children }: Required<WithCommonSnippet> = $props();
+  const isLibrary = page.url.pathname === "/library/";
+
+  const { tabs }: { tabs?: Snippet } = $props();
 </script>
 
-<div class="sticky -mt-4 -top-4">
-  <section
-    id="shelf"
-    class="grid gap-y-2.5 z-10 py-4 bg-neutral-900 *:flex *:items-center *:justify-between"
-  >
-    <div>
-      <h1 class="text-2xl font-medium">Library</h1>
+<div data-library-header="" class="sticky -mt-4 -top-4 z-1">
+  <section class="gap-y-2.5 py-4 bg-neutral-900">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        {#if !isLibrary}
+          <a
+            href={resolve("/library")}
+            class="p-2 mr-2 hover:bg-neutral-700/80 rounded-md"
+          >
+            <ArrowLeftIcon size={22} />
+          </a>
+          <div class="size-9 bg-red-500 rounded-full mr-2.5"></div>
+          <h1 class="text-2xl font-medium">__libraryHeading</h1>
+        {:else}
+          <h1 class="text-2xl font-medium">Libs</h1>
+        {/if}
+      </div>
 
       <span class="flex-1"></span>
       <div class="flex items-center gap-x-2">
@@ -50,7 +65,6 @@
         </button>
       </div>
     </div>
+    {@render tabs?.()}
   </section>
 </div>
-
-{@render children()}

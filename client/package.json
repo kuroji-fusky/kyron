@@ -1,0 +1,57 @@
+{
+  "name": "kyron-client",
+  "productName": "kyron-client",
+  "description": "Download all the things",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": ".vite/build/main.js",
+  "scripts": {
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test:e2e": "playwright test",
+    "start": "electron-forge start",
+    "package": "vite build && electron-forge package",
+    "make": "vite build && electron-forge make",
+    "publish": "electron-forge publish"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.11.1",
+    "@electron-forge/maker-deb": "^7.11.1",
+    "@electron-forge/maker-dmg": "^7.11.1",
+    "@electron-forge/maker-rpm": "^7.11.1",
+    "@electron-forge/maker-squirrel": "^7.11.1",
+    "@electron-forge/maker-zip": "^7.11.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.11.1",
+    "@electron-forge/plugin-fuses": "^7.11.1",
+    "@electron-forge/plugin-vite": "^7.11.1",
+    "@electron/fuses": "^2.0.0",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/instrument-sans": "^5.2.8",
+    "@fontsource/inter": "^5.2.8",
+    "@lucide/svelte": "^1.16.0",
+    "@playwright/test": "^1.58.2",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.53.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/electron-squirrel-startup": "^1.0.2",
+    "@types/node": "^25.3.0",
+    "electron": "^40.6.0",
+    "svelte": "^5.53.3",
+    "svelte-check": "^4.4.3",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "peerDependencies": {
+    "lodash": "^4.18.1"
+  }
+}

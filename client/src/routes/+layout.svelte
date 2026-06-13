@@ -9,9 +9,9 @@
   } from "$lib/contexts";
   import {
     PanelLeftIcon,
-    ArrowRightIcon,
-    ArrowLeftIcon,
     setLucideProps,
+    WifiOffIcon,
+    DownloadIcon,
   } from "@lucide/svelte";
 
   const { children } = $props();
@@ -31,33 +31,35 @@
   setModalStates(() => modalStates);
 </script>
 
-<div class="px-3 text-white flex items-center h-11">
+<div class="z-100 px-3 text-white flex items-center h-11">
   <button
     class="p-1 cursor-pointer"
     onclick={() => (sidebarState = !sidebarState)}
   >
-    <PanelLeftIcon size={21} />
+    <PanelLeftIcon size={22} />
   </button>
-  <!-- <button class="p-1">
-    <ArrowLeftIcon size={21} />
-  </button>
-  <button class="p-1">
-    <ArrowRightIcon size={21} />
-  </button> -->
   <div class="__draggable flex-1 size-full flex items-center px-2">
-    <span class="font-bold text-sm">Library - Kyron</span>
+    <span class="font-bold">Kyron</span>
+  </div>
+  <div class="flex items-center mr-32">
+    <button aria-label="Offline" class="bg-amber-600 p-1.5">
+      <WifiOffIcon />
+    </button>
+    <button aria-label="Activity" class="bg-green-600 p-1.5">
+      <DownloadIcon />
+    </button>
   </div>
 </div>
 
 <div
   id="root"
-  class=" flex relative transition-[margin] duration-200"
+  class="flex relative transition-[margin] duration-200"
   style={`margin-left: calc(var(--spacing)*${!sidebarState ? sidebarMinSize : sidebarMaxSize})`}
 >
   <GlobalSidebar />
   <div
     id="container"
-    class="overflow-y-auto overflow-x-hidden flex-1 rounded-md border border-neutral-700 bg-neutral-900 h-full ml-0 mt-0 m-3 px-6 py-4"
+    class="overflow-y-auto relative overflow-x-hidden flex-1 rounded-md border border-neutral-700 bg-neutral-900 h-full ml-0 mt-0 m-3 px-6 py-4"
   >
     {@render children?.()}
   </div>

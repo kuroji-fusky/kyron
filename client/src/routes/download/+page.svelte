@@ -1,6 +1,6 @@
 <script>
   import { resolve } from "$app/paths";
-  import { Checkbox, CheckboxDetails } from "$lib/components";
+  import { Checkbox, CheckboxDetails, LegalDisclaimer } from "$lib/components";
   import {
     XIcon,
     ArrowRightIcon,
@@ -9,8 +9,9 @@
   } from "@lucide/svelte";
 </script>
 
-<div class="max-w-5xl mx-auto flex flex-col gap-y-9">
-  <section class="mt-12">
+<div class="max-w-5xl mx-auto flex flex-col gap-y-5">
+  <h1 class="text-2xl mt-1 font-medium">Download</h1>
+  <section>
     <div class="mb-5">
       <label for="downloader-field" class="relative block">
         <div class="absolute top-0 right-0 py-2 px-3 flex gap-x-1">
@@ -33,9 +34,9 @@
           placeholder="Paste URL(s) or search for videos"
         />
       </label>
-      <span class="opacity-65 text-sm leading-0"
-        >Press <kbd>Shift+Enter</kbd> for a new line</span
-      >
+      <div class="opacity-65 text-sm mt-1.5">
+        Press <kbd>Shift+Enter</kbd> for a new line
+      </div>
     </div>
 
     <div class="py-3.5 px-4 bg-violet-200/40 dark:bg-violet-500/10 rounded-md">
@@ -108,19 +109,8 @@
     </div>
   </section>
 
-  <section>
-    <h2>Bulk tasks</h2>
-    <button class="px-2.5 py-1.5 bg-violet-600 rounded-md text-white">
-      Download a channel or playlist
-    </button>
-
-    <button class="px-2.5 py-1.5 bg-violet-600 rounded-md text-white">
-      Find lost video(s)
-    </button>
-  </section>
-
-  <section class="mb-10">
-    <p id="notice" class="opacity-50">
+  <section class="mb-10 prose-p:opacity-50 space-y-4">
+    <p id="notice">
       Kyron heavily relies on <a
         href="https://github.com/yt-dlp/yt-dlp"
         target="_blank"
@@ -130,5 +120,6 @@
       as downloading a channel or performing bulk archives, go to
       <a href={resolve("/library")}>Library</a>.
     </p>
+    <LegalDisclaimer />
   </section>
 </div>
