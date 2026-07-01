@@ -4,6 +4,10 @@ allowBuilds:
   esbuild: true
 
 packages:
-  - "kyron-client"
-  - "kyron-shared"
-  - "kyron-dashboard"
+  - "client"
+  - "web_shared"
+  - "web_dashboard"
+
+hoistPattern:
+- "*electron*"
+- "esm-dev"
