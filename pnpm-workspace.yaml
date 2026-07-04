@@ -9,5 +9,9 @@ packages:
   - "web_dashboard"
 
 hoistPattern:
-- "*electron*"
-- "esm-dev"
+  - "*electron*"
+  - "esm-dev"
+
+onlyBuiltDependencies:
+  - "@tailwindcss/oxide"
+  - esbuild
