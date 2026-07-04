@@ -9,7 +9,7 @@ An all-in-one downloader, archiver, and asset manager; built for an archivists' 
    remote controlled via the desktop client or accessed via a browser
    that accesses `web_dashboard`
 - `python_shared` - shared Python code for the backend and sidecar
-- `sidecar` - the a Python background process responsible for communicating
+- `sidecar` - the Python background process responsible for communicating
   between the desktop client and OS-native APIs such as task scheduling
 - `web_dashboard` - A dashboard similar to what the desktop client offers
 - `web_shared` - shared code and Svelte components
@@ -49,10 +49,11 @@ python server/generate-token.py
 ```
 
 - `KYRON_API_TOKEN`: This will be solely be interfacing the client or elsewhere you'd use this on, this token can be safely regenerated from the dashboard
-  > [!NOTE]
-  > During development, once regenerated, the API token from the `.env` upon
-  > initial setup is ignored and no longer valid. So please make sure your token
-  > reflects from your `.env` file.
+
+> [!NOTE]
+ During development, once `KYRON_API_TOKEN` is regenerated, the API token from the `.env` upon
+> initial setup is ignored and no longer valid. So please make sure your token
+> reflects from your `.env` file.
 
 - `KYRON_PRIVATE_TOKEN`: A private token used on the server for performing destructive actions such as performing tasks in bulk and deleting files
   - This, however, can't be regenerated unless the server has shut down, then you can run the token script but with the `--force-regen private` flag to regenerate the private token
