@@ -2,8 +2,9 @@
 
 An all-in-one downloader, archiver, and asset manager; built for an archivists' mind.
 
-## Directory structure
+## Project structure
 
+- `cli` - command line version of the Python sidecar
 - `client` - the Electron desktop client
 - `server` - Python server written in FastAPI, which can also be used to be
    remote controlled via the desktop client or accessed via a browser

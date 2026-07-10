@@ -16,6 +16,7 @@
   "type": "module",
   "version": "0.0.1",
   "devDependencies": {
-    "@biomejs/biome": "2.4.0"
+    "@biomejs/biome": "2.4.0",
+    "concurrently": "^10.0.3"
   }
 }
