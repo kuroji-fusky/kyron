@@ -4,27 +4,38 @@ An all-in-one downloader, archiver, and asset manager; built for an archivists' 
 
 ## Project structure
 
-- `cli` - command line version of the Python sidecar
-- `client` - the Electron desktop client
-- `server` - Python server written in FastAPI, which can also be used to be
-   remote controlled via the desktop client or accessed via a browser
-   that accesses `web_dashboard`
-- `python_shared` - shared Python code for the backend and sidecar
-- `sidecar` - the Python background process responsible for communicating
-  between the desktop client and OS-native APIs such as task scheduling
-- `web_dashboard` - A dashboard similar to what the desktop client offers
-- `web_shared` - shared code and Svelte components
+- **Frontend**
+  - [`client`](/client/) - the Electron desktop client
+  - [`web_dashboard`](/web_dashboard/) - A dashboard similar to what the desktop client offers
+  - [`cli`](/cli/) - command line version of the Python sidecar
+
+- **Backend**
+  - [`sidecar`](/sidecar/) - the Python background process responsible for communicating
+    between the desktop client and OS-native APIs such as task scheduling
+  - [`server`](/server/) - Python server written in FastAPI, which can also be used to be
+     remote controlled via the desktop client or accessed via a browser
+     that accesses `web_dashboard`
+
+- **Shared code**
+  - [`python_shared`](/python_shared/) - shared Python code for the backend and sidecar
+  - [`web_shared`](/web_shared/) - shared code and Svelte components
 
 ## Contributing
 
-This project requires a base prerequisites of Python 3.13, Node 22 or higher,
-and the pnpm package manager installed. Docker is optional but recommended for
-running or hosting the server.
+### Prerequisites
 
 > [!WARNING]
-> pnpm should be at v10.x since there is a strange quirk with `electron-forge`
+> pnpm should be at version **10.x**, since there is a strange quirk with `electron-forge`
 > not resolving other Electron dependencies, failing to run and build the
 > application despite having `node-linker=hoisted` defined from the project's `.npmrc`.
+
+- Python 3.13
+- Node 22, LTS or higher,
+- pnpm package manager
+- Docker (optional but recommended for
+running or hosting the server)
+
+### Setup
 
 At the root of this repository, install the necessary dependencies:
 
