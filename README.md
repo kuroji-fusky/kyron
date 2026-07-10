@@ -17,7 +17,7 @@ An all-in-one downloader, archiver, and asset manager; built for an archivists' 
      that accesses `web_dashboard`
 
 - **Shared code**
-  - [`python_shared`](/python_shared/) - shared Python code for the backend and sidecar
+  - [`kyron_shared`](/kyron_shared/) - shared Python code for the backend and sidecar
   - [`web_shared`](/web_shared/) - shared code and Svelte components
 
 ## Contributing
@@ -43,7 +43,7 @@ At the root of this repository, install the necessary dependencies:
 pnpm install
 
 python -m venv venv
-pip install -r requirements.txt
+pip install -e .
 ```
 
 You can run a development build of the desktop client via:

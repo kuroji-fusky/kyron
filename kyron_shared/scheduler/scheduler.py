@@ -1,12 +1,9 @@
-from ..platform_checks import IS_LINUX, IS_MACOS, IS_WINDOWS  # type: ignore
+from ..platform import IS_LINUX, IS_MACOS, IS_WINDOWS  # type: ignore
 import abc
 from typing import final, Literal, Optional
 
 
 class _OSNativeScheduler(abc.ABC):
-    # def assign_task(self, name: str):
-    #     ...
-
     @abc.abstractmethod
     def list_tasks(self):
         pass

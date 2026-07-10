@@ -1,3 +1,6 @@
+from kyron_shared import platform
+
+
 def main():
     ...
 

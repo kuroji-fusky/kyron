@@ -1,6 +1,7 @@
-node_modules
+node_modules/
 
 # python specific
-__pycache__
-.mypy_cache
-venv
+__pycache__/
+.mypy_cache/
+venv/
+*.egg-info/
