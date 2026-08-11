@@ -1,8 +1,4 @@
-import platform
-from typing import Final
+from platform import system
 
-os_t = platform.system().lower()
-
-IS_WINDOWS: Final = os_t == "windows"
-IS_MACOS: Final = os_t == "darwin"
-IS_LINUX: Final = os_t == "linux"
+is_linux = system() == "Linux"
+is_windows = system() == "Windows"

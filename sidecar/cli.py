@@ -1,4 +1,4 @@
-from kyron_shared import platform
+from kyron_shared.fs import KyronFilesystem
 
 
 def main():

@@ -1,6 +1,5 @@
 import Button from "./Button.svelte"
 import Checkbox from "./Checkbox.svelte"
-import CheckboxDetails from "./CheckboxDetails.svelte"
 import GlobalSidebar from "./GlobalSidebar.svelte"
 import Notice from "./Notice.svelte"
 import GroupContainer from "./GroupContainer.svelte"
@@ -11,7 +10,6 @@ export {
   Button,
   GroupContainer,
   Checkbox,
-  CheckboxDetails,
   Notice,
   GlobalSidebar,
   LegalDisclaimer,
