@@ -1,6 +1,8 @@
-from ..platform import IS_LINUX, IS_MACOS, IS_WINDOWS  # type: ignore
+from ..platform import is_windows, is_linux, is_macos
 import abc
 from typing import final, Literal, Optional
+
+__all__ = ["scheduler"]
 
 
 class _OSNativeScheduler(abc.ABC):
@@ -90,16 +92,13 @@ class MacOSScheduler(_OSNativeScheduler):
 
 
 def scheduler() -> _OSNativeScheduler | OSError:
-    if IS_WINDOWS:
+    if is_windows:
         return WindowsScheduler()
 
-    if IS_LINUX:
+    if is_linux:
         return LinuxScheduler()
 
-    if IS_MACOS:
+    if is_macos:
         return MacOSScheduler()
 
-    return OSError("Bruh.")
-
-
-__all__ = ["scheduler"]
+    return OSError("Operating system not supported, bruh.")
