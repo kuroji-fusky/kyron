@@ -6,7 +6,14 @@ build-backend = "setuptools.build_meta"
 name = "kyron"
 version = "0.1.0"
 requires-python = ">=3.13"
-dependencies = ["httpx[http2]", "colorama", "pyinstaller"]
+dependencies = [
+  "httpx[http2]",
+  "colorama",
+  "pyinstaller",
+  "fastapi",
+  "uvicorn",
+  "redis",
+]
 
 [tool.setuptools]
 packages = ["kyron_shared", "sidecar", "server"]
