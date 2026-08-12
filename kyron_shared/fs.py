@@ -13,13 +13,23 @@ def path_to_str(path: Path | str) -> str:
 class KyronFilesystem:
     """A set of utilities for scanning videos, metadata, and verifying downloaded content"""
 
-    def __init__(self, dir: str, envs: KyronBaseEnvironment):
-        self.set_directory = Path(dir)
-        self.ffmpeg_executable = envs.ffmpeg_dir
-
-        self.kyron_path = self.set_directory / ".kyron"
+    def __init__(self, dir: str, *, envs: KyronBaseEnvironment = KyronBaseEnvironment()):
+        if not Path(dir).is_dir():
+            raise OSError("That ain't a directory fam")
         
-        self.kyron_global_config = Path.home() / ".kyron_global"
+        if Path(dir).is_file():
+            raise OSError("Bruh I need folders, not FILES")
+        
+        self.set_directory = Path(dir)
+        self.raw_dir_contents = self.set_directory.iterdir()
+        
+        self.dir_contents = [f.name for f in self.raw_dir_contents]
+
+        self.executables = envs
+
+        # directories
+        self.kyron_path = self.set_directory / ".kyron"
+        self.kyron_app_config = Path.home() / ".kyron_app_config"
 
     def has_kyron_directory(self) -> bool:
         """Checks if the directory has a valid `.kyron` subfolder, returns a boolean value"""

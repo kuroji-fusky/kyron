@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["kyron_shared", "sidecar", "server"]
+packages = ["kyron_shared", "server", "worker"]

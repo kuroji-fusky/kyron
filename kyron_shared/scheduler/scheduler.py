@@ -1,4 +1,4 @@
-from ..platform import is_windows, is_linux, is_macos
+from ..os import is_windows, is_linux, is_macos
 import abc
 from typing import final, Literal, Optional
 

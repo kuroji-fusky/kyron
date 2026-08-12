@@ -13,12 +13,12 @@ class KyronBaseEnvironment:
     as they are required for Kyron to function fully
     """
 
-    def __init__(self, *, ffmpeg_dir: Path | str, ytdlp_dir: Path | str):
+    def __init__(self, *, ffmpeg_dir: OptionalPath = None, ytdlp_dir: OptionalPath = None):
         self.detected_os = system() or "Linux"
 
         # todo: for `has_*` methods; cache result from a top-level .kyron_global config so this function gets ran once
-        self.ffmpeg_dir = self.detect_exec("ffmpeg") if not ffmpeg_dir else path_to_str(ffmpeg_dir)  # noqa
-        self.ytdlp_dir = self.detect_exec("yt-dlp") if not ytdlp_dir else path_to_str(ytdlp_dir)  # noqa
+        self.ffmpeg_dir = self.detect_exec("ffmpeg")   # noqa
+        self.ytdlp_dir = self.detect_exec("yt-dlp")   # noqa
 
     def detect_exec(self, exec: str):
         """A wrapper for `shutil.which` then fallbacks to `os.environ.get(...)`, otherwise, returns None"""
