@@ -1,35 +1,32 @@
-from .environment import KyronBaseEnvironment
+from kyron_shared.environment import KyronBaseEnvironment
 from pathlib import Path
+from typing import Optional
 
-
-def path_to_str(path: Path | str) -> str:
-    """A small utility to convert any `Path` type to `str`"""
-    if isinstance(path, str):
-        return path
-    else:
-        return str(path)
+KYRON_APP_CONFIG = Path.home() / ".kyron_app_config"
 
 
 class KyronFilesystem:
     """A set of utilities for scanning videos, metadata, and verifying downloaded content"""
 
-    def __init__(self, dir: str, *, envs: KyronBaseEnvironment = KyronBaseEnvironment()):
+    def __init__(self,
+                 dir: str,
+                 *,
+                 envs: Optional[KyronBaseEnvironment] = None):
         if not Path(dir).is_dir():
             raise OSError("That ain't a directory fam")
-        
+
         if Path(dir).is_file():
             raise OSError("Bruh I need folders, not FILES")
-        
-        self.set_directory = Path(dir)
-        self.raw_dir_contents = self.set_directory.iterdir()
-        
-        self.dir_contents = [f.name for f in self.raw_dir_contents]
 
-        self.executables = envs
+        self.set_directory = Path(dir)
+        self.kyron_path = self.set_directory / ".kyron"
+
+        if envs is None:
+            self.executables = KyronBaseEnvironment()
 
         # directories
-        self.kyron_path = self.set_directory / ".kyron"
-        self.kyron_app_config = Path.home() / ".kyron_app_config"
+        self.raw_dir_contents = self.set_directory.iterdir()
+        self.dir_contents = [f.name for f in self.raw_dir_contents]
 
     def has_kyron_directory(self) -> bool:
         """Checks if the directory has a valid `.kyron` subfolder, returns a boolean value"""

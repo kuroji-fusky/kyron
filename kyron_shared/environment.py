@@ -1,9 +1,23 @@
-from .fs import path_to_str
-from .platform import is_windows
 import shutil
 import os
 from platform import system
 from pathlib import Path
+from typing import Optional
+
+
+__all__ = [
+    "is_linux",
+    "is_macos",
+    "is_windows",
+    "KyronBaseEnvironment"
+]
+
+
+is_linux = system() == "Linux"
+is_windows = system() == "Windows"
+is_macos = system() == "macOS"
+
+OptionalPath = Optional[Path | str]
 
 
 class KyronBaseEnvironment:
@@ -13,7 +27,10 @@ class KyronBaseEnvironment:
     as they are required for Kyron to function fully
     """
 
-    def __init__(self, *, ffmpeg_dir: OptionalPath = None, ytdlp_dir: OptionalPath = None):
+    def __init__(self,
+                 *,
+                 ffmpeg_dir: OptionalPath = None,
+                 ytdlp_dir: OptionalPath = None):
         self.detected_os = system() or "Linux"
 
         # todo: for `has_*` methods; cache result from a top-level .kyron_global config so this function gets ran once
@@ -37,7 +54,7 @@ class KyronBaseEnvironment:
             parsed_path = Path(dir) / exec
 
             if parsed_path.is_file() and os.access(parsed_path, os.X_OK):
-                return path_to_str(parsed_path)
+                return str(parsed_path)
 
         return None
 
