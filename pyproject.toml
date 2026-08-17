@@ -1,11 +1,16 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=82.0.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "kyron"
+name = "kyron_worker"
 version = "0.1.0"
 requires-python = ">=3.13"
+authors = [{ name = "Kuro", email = "hello@kurojifusky.com" }]
+
+# note: youtubedl and other ffmpeg wrapper libs are omitted as they can
+#       vary in implementation but required for the end-user for it to 
+#       be installed on their systems
 dependencies = [
   "httpx[http2]",
   "colorama",

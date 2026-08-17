@@ -1,24 +1,13 @@
 from typing import Any
 import json
 import re
-import subprocess
-
-
-def is_string_falsy(s: str) -> bool:
-    if not isinstance(s, str):
-        return False
-
-    return not s or not s.strip()
-
-
-class ArgumentError(BaseException):
-    pass
+import shutil
 
 
 ArgValue = str | int | float | bool | dict[str, Any]
 
 
-class CommandScaffolder:
+class KyronCommandScaffolder:
     """Scaffolds commands in a programmatic way; wraps `subprocess` and `os`"""
 
     def __init__(self, base_exec: str, *,
@@ -31,13 +20,21 @@ class CommandScaffolder:
         self.base_exec = base_exec
         self._parsed_cli_args: list[ArgValue] = [base_exec]
 
-        supress_output = subprocess.DEVNULL
-
         if precheck:
-            try:
-                subprocess.run([base_exec], stderr=supress_output, stdout=supress_output)  # noqa
-            except (FileNotFoundError, OSError) as e:
-                raise OSError(f"Executable {base_exec} encountered an error: {e}")  # noqa
+            exec = KyronCommandScaffolder.detect_exec(base_exec)
+
+            if exec is None:
+                raise FileNotFoundError(f"Executable {base_exec} does not exist")  # noqa
+
+    @staticmethod
+    def detect_exec(exec: str):
+        """A wrapper for `shutil.which` that returns an executable, will return `None` otherwise"""
+        exec_path = shutil.which(exec)
+
+        if exec_path is not None:
+            return exec_path
+
+        return None
 
     def add_argument[ArgType: ArgValue = str](self, arg_name: str, arg_value: ArgType, *, parse_json=False):
         """Appends an argument
@@ -70,8 +67,7 @@ class CommandScaffolder:
 
         Args:
             arg (str | int | bool): Argument value
-            autostrip (bool, optional): If value type is a string, automatically strips any whitespace, 
-            treating it as a sub-command in specific command line applications. Defaults to False.
+            autostrip (bool, optional): If value type is string, it automatically strips any whitespace, treating it as a sub-command in specific command line applications. Defaults to `False`.
         """
         if autostrip and isinstance(pos_arg_value, str):
             # split string then strip on the empty ones
@@ -84,3 +80,14 @@ class CommandScaffolder:
 
     def output(self):
         return " ".join(str(value) for value in self._parsed_cli_args)
+
+
+def is_string_falsy(s: str) -> bool:
+    if not isinstance(s, str):
+        return False
+
+    return not s or not s.strip()
+
+
+class ArgumentError(Exception):
+    pass
