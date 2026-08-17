@@ -24,6 +24,11 @@ An all-in-one downloader, archiver, and asset manager; built for an archivists' 
 
 ### Prerequisites
 
+> [!CAUTION]
+> Kyron requires an external runtime dependencies for FFmpeg and yt-dlp separately since Kyron doesn’t come bundled with the insaller or the source code of this repository.
+>
+> In other words, the end user must have FFmpeg and yt-dlp installed on their system for Kyron to function properly, *even during development*.
+
 > [!WARNING]
 > pnpm should be at version **10.x**, since there is a strange quirk with `electron-forge`
 > not resolving other Electron dependencies, failing to run and build the
